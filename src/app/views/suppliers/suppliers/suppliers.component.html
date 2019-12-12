@@ -1,0 +1,64 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      SUPPLIERS
+    </div>
+    <div class="card-body">
+      <table class="table table-light">
+        <thead class="thead-light">
+          <tr>
+            <th>Logo</th>
+            <th>Name</th>
+            <th>Abbr</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date Created</th>
+            <th>action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngIf="tableLoading; else dataShow">
+            <td colspan="7">
+              <i class="fa fa-spinner fa-spin" style="font-size: large;"></i>
+              <small class="text-sm">Fetching data...</small>
+            </td>
+          </tr>
+          <ng-template #dataShow>
+            <tr *ngFor="let supplier of suppliers">
+              <td>
+                <img
+                  src="{{
+                    supplier.logo
+                      ? supplier.logo
+                      : 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y'
+                  }}"
+                  class="img-avatar"
+                  width="30"
+                />
+              </td>
+              <td>{{ supplier.attributes.name }}</td>
+              <td>{{ supplier.attributes.abbr }}</td>
+              <td>{{ supplier.attributes.email }}</td>
+              <td>{{ supplier.attributes.phone }}</td>
+              <td>{{ supplier.attributes.created }}</td>
+              <td>
+                <button class="btn btn-sm btn-info">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="suppliers.length < 1">
+              <td colspan="7">
+                <i>No data found!</i>
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

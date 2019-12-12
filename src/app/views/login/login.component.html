@@ -1,0 +1,115 @@
+<div class="animated fadeIn app-body">
+  <main class="main d-flex align-items-center">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div
+          class="alert alert-danger alert-dismissible animated fadeIn"
+          role="alert"
+          *ngIf="isError"
+        >
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong> <i class="icon-close"></i> Opps !</strong> {{ msgError }}
+        </div>
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+              <form
+                [formGroup]="f"
+                novalidate
+                (submit)="onLogin()"
+                (keydown)="errors.clear($event.target.name)"
+              >
+                <h1>{{ name }}</h1>
+                <p class="text-muted">Sign In to your account</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-user"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    [ngClass]="{ 'is-invalid': errors.has('email') }"
+                    formControlName="email"
+                    placeholder="Email / Username"
+                    autocomplete="email"
+                  />
+                  <div class="invalid-feedback" *ngIf="errors.has('email')">
+                    {{ errors.get("email") }}
+                  </div>
+                </div>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.has('password') }"
+                    name="password"
+                    formControlName="password"
+                    placeholder="Password"
+                  />
+                  <div class="invalid-feedback" *ngIf="errors.has('password')">
+                    {{ errors.get("password") }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <!-- [disabled]="f.invalid" -->
+                    <button
+                      type="submit"
+                      [disabled]="btnLoginLoading"
+                      class="btn btn-primary px-4"
+                    >
+                      {{ btnLoginText }}
+                      <i
+                        class="fa fa-spinner fa-spin"
+                        *ngIf="btnLoginLoading"
+                      ></i>
+                    </button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-link px-0">
+                      Forgot password?
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div
+            class="card text-white bg-primary py-5 d-md-down-none"
+            style="width:44%"
+          >
+            <div class="card-body text-center">
+              <div>
+                <h2>Sign up</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <a class="btn btn-primary active mt-3" [href]="'#/register'">
+                  Register Now
+                </a>
+                <!--Register Now!-->
+                <!--<button type="button" class="btn btn-primary active mt-3"></button>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

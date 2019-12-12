@@ -1,0 +1,133 @@
+<div class="animated fadeIn app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="alert alert-success mx-4" *ngIf="isSuccess" role="alert">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+          </div>
+
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form
+                [formGroup]="form"
+                novalidate
+                (submit)="onRegister()"
+                (keydown)="errors.clear($event.target.name)"
+              >
+                <a [routerLink]="['/login']" class="float-right">
+                  Go To Login
+                </a>
+                <h1>Register</h1>
+                <p class="text-muted">Create your account</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-user"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Name"
+                    autocomplete="off"
+                    [ngClass]="{ 'is-invalid': errors.has('name') }"
+                    formControlName="name"
+                    required
+                  />
+                  <div class="invalid-feedback" *ngIf="errors.has('name')">
+                    {{ errors.get("name") }}
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    [ngClass]="{ 'is-invalid': errors.has('email') }"
+                    formControlName="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                  />
+                  <div class="invalid-feedback" *ngIf="errors.has('email')">
+                    {{ errors.get("email") }}
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': errors.has('password') }"
+                    name="password"
+                    formControlName="password"
+                    placeholder="Password"
+                  />
+                  <div class="invalid-feedback" *ngIf="errors.has('password')">
+                    {{ errors.get("password") }}
+                  </div>
+                </div>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="password"
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': errors.has('password_confirmation')
+                    }"
+                    name="password_confirmation"
+                    formControlName="password_confirmation"
+                    placeholder="Password Confirm"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="errors.has('password_confirmation')"
+                  >
+                    {{ errors.get("password_confirmation") }}
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-block btn-success"
+                  [disabled]="btnLoginLoading"
+                >
+                  Create Account
+                  <i class="fa fa-spinner fa-spin" *ngIf="btnLoginLoading"></i>
+                </button>
+              </form>
+            </div>
+            <!--<div class="card-footer p-4">
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
